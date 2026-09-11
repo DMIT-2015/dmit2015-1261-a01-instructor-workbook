@@ -54,7 +54,7 @@
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
             <version>2.7.0</version>
-        </dependency> <!-- Lombok is for code generation -->
+        </dependency>
 
         <!-- Additional tools to use with Jakarta Faces -->
         <dependency>
