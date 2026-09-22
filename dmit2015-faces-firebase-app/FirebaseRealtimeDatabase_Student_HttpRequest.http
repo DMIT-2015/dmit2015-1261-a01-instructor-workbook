@@ -1,0 +1,74 @@
+# Each REST API request must end the database path with .json.
+# Example Firebase base URI:
+# https://your-project-id-default-rtdb.firebaseio.com
+#
+# Example JSON data path:
+# Student
+
+@firebaseBaseUri = https://dmit2015-1261-a01-swunait-default-rtdb.firebaseio.com
+@jsonDataPath = Student
+@idValue = 123
+
+### PUT writes data to the exact path.
+# If data already exists at this path, the full object is replaced.
+
+PUT {{firebaseBaseUri}}/{{jsonDataPath}}/{{idValue}}.json
+Content-Type: application/json
+
+{
+  "id": "{{idValue}}",
+  "firstName": "Bart",
+  "last": "Simpson"
+}
+
+### PUT writes data to the exact path.
+# If data already exists at this path, the full object is replaced.
+
+PUT {{firebaseBaseUri}}/{{jsonDataPath}}/1234.json
+Content-Type: application/json
+
+{
+  "id": "1234",
+  "firstName": "Lisa",
+  "last": "Simpson"
+}
+
+
+
+### Read all JSON data at the path
+# This reads all child objects stored under jsonDataPath.
+
+GET {{firebaseBaseUri}}/{{jsonDataPath}}.json
+
+### Read one JSON object by explicit id
+# This reads the object stored at jsonDataPath/idValue.
+
+GET {{firebaseBaseUri}}/{{jsonDataPath}}/{{idValue}}.json
+
+### Update part of a JSON object
+# Any properties not included in the request body are removed.
+
+PUT {{firebaseBaseUri}}/{{jsonDataPath}}/{{idValue}}.json
+Content-Type: application/json
+
+{
+  "id": "{{idValue}}",
+  "firstName": "Homeless",
+  "lastName": "Simpson",
+  "kids": "Bart, Lisa"
+}
+
+### PATCH updates only the specified properties.
+# Existing properties not included in the request body are preserved
+
+PUT {{firebaseBaseUri}}/{{jsonDataPath}}/{{idValue}}.json
+Content-Type: application/json
+
+{
+  "lastName": "Simpleton"
+}
+
+### Delete one JSON object by explicit id
+# DELETE removes the object stored at jsonDataPath/idValue.
+
+DELETE {{firebaseBaseUri}}/{{jsonDataPath}}/{{idValue}}.json
