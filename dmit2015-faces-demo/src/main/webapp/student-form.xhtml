@@ -10,8 +10,8 @@
     <title>Student Registration</title>
 </h:head>
 <h:body>
+    <p:messages id="messages" showDetail="true" />
 <h:form>
-    <p:messages showDetail="true" />
 
     <p:panel header="Student Registration">
 
@@ -49,7 +49,7 @@
                 value="Submit"
                 action="#{studentFormBean.submit()}"
                 process="@form"
-                update="@form" />
+                update="@form :messages" />
 
 
         <h:outputText value="Successful submissions: #{studentFormBean.submissionCount}" />
@@ -74,7 +74,7 @@
             <p:commandButton value="remove"
                              action="#{studentListSession.removeStudentInfo(currentStudent)}"
                              process="@this"
-                             update="studentInfosDataTable" />
+                             update="studentInfosDataTable :messages" />
         </p:column>
 
     </p:dataTable>
