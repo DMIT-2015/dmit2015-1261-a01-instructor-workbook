@@ -14,18 +14,18 @@ Content-Type: application/json
 }
 
 ### PUT modifies an existing record.
-PUT http://localhost:8090/restapi/TodoItemDtos/4
+PUT http://localhost:8090/restapi/TodoItemDtos/6
 Content-Type: application/json
 
 {
-  "id": 4,
-  "name": "Done Demo using Http Client a POST request",
+  "id": 6,
+  "name": "Testing version conflict",
   "complete": true,
-  "version": 0
+  "version": 1
 }
 
 ### DELETE removes a record and returns 204.
-DELETE http://localhost:8090/restapi/TodoItemDtos/2
+DELETE http://localhost:8090/restapi/TodoItemDtos/7
 
 ### Requests for nonexistent records return 404 where appropriate.
 #DELETE http://localhost:8090/restapi/TodoItems/22
