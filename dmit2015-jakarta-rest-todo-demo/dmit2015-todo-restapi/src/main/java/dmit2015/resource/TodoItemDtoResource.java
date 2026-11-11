@@ -135,7 +135,9 @@ public class TodoItemDtoResource {
 
         // Returns an HTTP status "200 OK" and include in the body of the response the object that was updated
         TodoItemDto updatedDto = TodoItemMapper.INSTANCE.toDto(existingTodoItem);
-        return Response.ok(updatedDto).build();
+        return Response
+                .ok(updatedDto)
+                .build();
     }
 
     @DELETE            // This method only accepts HTTP DELETE requests.
