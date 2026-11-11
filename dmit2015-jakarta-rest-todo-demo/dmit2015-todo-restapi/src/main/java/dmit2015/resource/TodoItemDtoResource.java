@@ -99,7 +99,9 @@ public class TodoItemDtoResource {
                 .orElseThrow(NotFoundException::new);
 
         if (!Objects.equals(existingTodoItem.getVersion(), dto.getVersion())) {
-            throw new ClientErrorException("Item was modified by another user.", Response.Status.CONFLICT);
+            throw new ClientErrorException(
+                    "The data you are trying to update has changed since your last read request.",
+                    Response.Status.CONFLICT);
         }
 
         TodoItem updatedTodoItem = TodoItemMapper.INSTANCE.toEntity(dto);
@@ -121,13 +123,13 @@ public class TodoItemDtoResource {
         } catch (OptimisticLockException ex) {
             return Response
                     .status(Response.Status.CONFLICT)
-                    .entity("The data you are trying to update has changed since your last read request.")
+                    .entity("The data was modified by another transaction.")
                     .build();
         } catch (Exception ex) {
             // Return an HTTP status of "500 Internal Server Error" containing the exception message
             return Response.
                     serverError()
-                    .entity(ex.getMessage())
+                    .entity("An unexpected error occurred while updating the Todo item.")
                     .build();
         }
 
