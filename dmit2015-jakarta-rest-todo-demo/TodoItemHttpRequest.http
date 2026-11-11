@@ -14,12 +14,12 @@ Content-Type: application/json
 }
 
 ### PUT modifies an existing record.
-PUT http://localhost:8090/restapi/TodoItemDtos/6
+PUT http://localhost:8090/restapi/TodoItemDtos/4
 Content-Type: application/json
 
 {
-  "id": 6,
-  "name": "Testing version conflict",
+  "id": 4,
+  "name": "Testing version conflict v1",
   "complete": true,
   "version": 1
 }

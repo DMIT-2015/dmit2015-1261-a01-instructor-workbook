@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import java.net.URI;
+import java.util.Objects;
 
 /**
  * This Jakarta RESTful Web Services root resource class provides common REST API endpoints to
@@ -71,6 +72,7 @@ public class TodoItemResource {
         // Returns an HTTP status of "201 Created" if the TodoItem was successfully persisted
         return Response
                 .created(location)
+                .entity(newTodoItem)
                 .build();
     }
 
@@ -92,6 +94,10 @@ public class TodoItemResource {
         TodoItem existingTodoItem = todoItemRepository
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
+
+        if (!Objects.equals(existingTodoItem.getVersion(), updatedTodoItem.getVersion())) {
+            throw new ClientErrorException("Item was modified by another user.", Response.Status.CONFLICT);
+        }
 
         existingTodoItem.setVersion(updatedTodoItem.getVersion());
         existingTodoItem.setTask(updatedTodoItem.getTask());

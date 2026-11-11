@@ -12,6 +12,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
 import java.net.URI;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -96,6 +97,10 @@ public class TodoItemDtoResource {
         TodoItem existingTodoItem = todoItemRepository
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
+
+        if (!Objects.equals(existingTodoItem.getVersion(), dto.getVersion())) {
+            throw new ClientErrorException("Item was modified by another user.", Response.Status.CONFLICT);
+        }
 
         TodoItem updatedTodoItem = TodoItemMapper.INSTANCE.toEntity(dto);
 

@@ -87,8 +87,10 @@ public class TodoItemDtoCrudView implements Serializable {
     public void onGenerateData() {
         try {
             var faker = new Faker();
+            Integer version = selectedTodoItemDto.getVersion();
             selectedTodoItemDto = TodoItemDto.of(faker);
             selectedTodoItemDto.setId(selectedId);
+            selectedTodoItemDto.setVersion(version);
         } catch (Exception e) {
             Messages.addGlobalError("Error generating data {0}", e.getMessage());
         }
