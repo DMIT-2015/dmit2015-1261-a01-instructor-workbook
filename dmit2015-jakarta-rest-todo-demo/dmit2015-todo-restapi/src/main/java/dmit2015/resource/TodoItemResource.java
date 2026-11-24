@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import java.net.URI;
+import java.util.Objects;
 
 /**
  * This Jakarta RESTful Web Services root resource class provides common REST API endpoints to
@@ -71,6 +72,7 @@ public class TodoItemResource {
         // Returns an HTTP status of "201 Created" if the TodoItem was successfully persisted
         return Response
                 .created(location)
+                .entity(newTodoItem)
                 .build();
     }
 
@@ -93,6 +95,12 @@ public class TodoItemResource {
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
 
+        if (!Objects.equals(existingTodoItem.getVersion(), updatedTodoItem.getVersion())) {
+            throw new ClientErrorException(
+                    "The data you are trying to update has changed since your last read request.",
+                    Response.Status.CONFLICT);
+        }
+
         existingTodoItem.setVersion(updatedTodoItem.getVersion());
         existingTodoItem.setTask(updatedTodoItem.getTask());
         existingTodoItem.setDone(updatedTodoItem.isDone());
@@ -102,18 +110,20 @@ public class TodoItemResource {
         } catch (OptimisticLockException ex) {
             return Response
                     .status(Response.Status.CONFLICT)
-                    .entity("The data you are trying to update has changed since your last read request.")
+                    .entity("The data was modified by another transaction")
                     .build();
         } catch (Exception ex) {
             // Return an HTTP status of "500 Internal Server Error" containing the exception message
             return Response.
                     serverError()
-                    .entity(ex.getMessage())
+                    .entity("An unexpected error occurred while updating the Todo item.")
                     .build();
         }
 
         // Returns an HTTP status "200 OK" and include in the body of the response the object that was updated
-        return Response.ok(existingTodoItem).build();
+        return Response
+                .ok(existingTodoItem)
+                .build();
     }
 
     @DELETE            // This method only accepts HTTP DELETE requests.
