@@ -48,6 +48,13 @@ public class TodoItemRepository {
                 .getResultList();
     }
 
+    public List<TodoItem> findAllByUsername(String username) {
+        return entityManager.createQuery(
+                "SELECT o FROM TodoItem o WHERE o.username = :uname", TodoItem.class)
+                .setParameter("uname", username)
+                .getResultList();
+    }
+
     @Transactional
     public TodoItem update(@Valid TodoItem updatedTodoItem) {
        Optional<TodoItem> optionalTodoItem = findById(updatedTodoItem.getId());
