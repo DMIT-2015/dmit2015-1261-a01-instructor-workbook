@@ -1,0 +1,31 @@
+### Create a new entity
+POST http://localhost:8090/restapi/students
+Content-Type: application/json
+
+{
+  "firstName": "Cody",
+  "lastName": "Fjardo",
+  "courseSection": "DMIT2015-1261"
+}
+
+### GET All entity from REST API endpoint
+GET http://localhost:8090/restapi/students
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJCNXlpb2ZwVV9CVlpPd2QtQWxMWHBMQll5Z3l6ZkRmS2x0UzJ2d0Z3c0lVIn0.eyJleHAiOjE3OTU1NTkzMTIsImlhdCI6MTc5NTU1NzUxMiwianRpIjoib25ydHJvOjg1YzcxZTNlLTYxNzktMDE1NS04ODEzLWRkMDhhMDQyMzQ4YSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODE4MC9yZWFsbXMvZG1pdDIwMTUtcmVhbG0iLCJzdWIiOiJmM2IwMzA4ZS1iZGQ2LTQyMGItYjg1NC1hYWYzZmE0MmY3YTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJkbWl0MjAxNS1zZWN1cmUtcmJhYy1yZXN0YXBpIiwic2lkIjoiUktwX2szTmp0ZTlTa253MnI4eHlJckxUIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJTYWxlcyJdfSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsInVwbiI6InRmb3giLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJUYXlsZXIgRm94IiwiZ3JvdXBzIjpbIlNhbGVzIl0sInByZWZlcnJlZF91c2VybmFtZSI6InRmb3giLCJnaXZlbl9uYW1lIjoiVGF5bGVyIiwiZmFtaWx5X25hbWUiOiJGb3giLCJlbWFpbCI6InRmb3hAZG1pdDIwMTUuY2EifQ.Sokio0f8IuyxCTUhR1o2yWtUBgwR334cUSQptrpB7lHuG4HGncVgbdtNf6_wccfySfMB9DBm9bjV1H-XR8AP7JCnrVHv7oiTMfLC5_q-NWvr4w1sdSYrvKbcz5VZ_76-EO4uCBMkbh4I_-MCz3E47DJ2gB8nZQ-Mgwq42qWwqvvl4WSK0Fp6OwLgzKEd12ehW3szvIBZULBZdPbIiW9KL5_oExXPptK9dd0uzvaB6wN3VXE3lusoZ0jQzf3O4Z871JWYzQP72ZyyCx_ujUvmo4cAy_g53MJ2B0_2Kuitd32z-Z2aWPw0bShTb_KCsjdoEfRgBRcvkhmTSUVcsa2AZA
+
+### GET One entity from REST API endpoint
+GET http://localhost:8090/restapi/students/11
+
+### UPDATE entity at the REST API endpoint - will replace all properties with the properties in the request body
+PUT http://localhost:8090/restapi/students/11
+Content-Type: application/json
+
+{
+  "id": 11,
+  "firstName": "Justin",
+  "lastName": "Rankin",
+  "courseSection": "SDEV2301-1261",
+  "version": 0
+}
+### DELETE entity at the REST API endpoint
+DELETE http://localhost:8090/restapi/students/11
+
