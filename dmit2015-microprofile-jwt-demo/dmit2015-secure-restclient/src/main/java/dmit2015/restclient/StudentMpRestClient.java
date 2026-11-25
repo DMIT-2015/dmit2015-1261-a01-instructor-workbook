@@ -4,12 +4,17 @@ import dmit2015.model.Student;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequestScoped
+@RegisterClientHeaders(AuthHeaderFactory.class)
+@RegisterProvider(ForbiddenResponseMapper.class)
+@RegisterProvider(BadRequestResponseMapper.class)
 @RegisterRestClient // baseUri is defined in `src/resources/META-INF/microprofile-config.properties
 public interface StudentMpRestClient {
 

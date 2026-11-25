@@ -18,6 +18,8 @@ public class TodoItemDto {
 
     private Integer version;
 
+    private String username;
+
     public static TodoItemDto of(Faker faker) {
         TodoItemDto dto = new TodoItemDto();
         dto.setName("Play " + faker.videoGame().title() + " on " + faker.videoGame().genre());
