@@ -113,6 +113,7 @@ public class TodoItemDtoResource {
 
     }
 
+    @RolesAllowed({"Sales","Shipping"})
     @PUT    // PUT: restapi/TodoItemsDto/5
     @Path("{id}")
     public Response updateTodoItem(@PathParam("id") Long id, TodoItemDto dto) {
@@ -133,6 +134,11 @@ public class TodoItemDtoResource {
         }
 
         TodoItem existingTodoItem = optionalTodoItem.orElseThrow();
+        // Verify request is to update owner only data
+        String username = optionalUsername.getValue().orElseThrow();
+        if (!username.equalsIgnoreCase(existingTodoItem.getUsername())) {
+            throw new BadRequestException("Access denied. You are not allowed to update data not owned by you.");
+        }
 
         if (!Objects.equals(existingTodoItem.getVersion(), dto.getVersion())) {
             throw new ClientErrorException(
@@ -166,6 +172,7 @@ public class TodoItemDtoResource {
                 .build();
     }
 
+    @RolesAllowed({"Sales","Shipping"})
     @DELETE // DELETE: restapi/TodoItemsDto/5
     @Path("{id}")
     public Response deleteTodoItem(@PathParam("id") Long id) {
@@ -173,6 +180,13 @@ public class TodoItemDtoResource {
 
         if (optionalTodoItem.isEmpty()) {
             throw new NotFoundException();
+        }
+
+        // Verify request is to delete owner only data
+        TodoItem existingTodoItem = optionalTodoItem.orElseThrow();
+        String username = optionalUsername.getValue().orElseThrow();
+        if (!username.equalsIgnoreCase(existingTodoItem.getUsername())) {
+            throw new BadRequestException("Access denied. You are not allowed to delete data not owned by you.");
         }
 
         todoItemRepository.deleteById(id);
