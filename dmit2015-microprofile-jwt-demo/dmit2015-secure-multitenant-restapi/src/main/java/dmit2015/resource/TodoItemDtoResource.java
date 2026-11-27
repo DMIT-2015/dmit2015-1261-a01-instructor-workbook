@@ -137,7 +137,7 @@ public class TodoItemDtoResource {
         // Verify request is to update owner only data
         String username = optionalUsername.getValue().orElseThrow();
         if (!username.equalsIgnoreCase(existingTodoItem.getUsername())) {
-            throw new BadRequestException("Access denied. You are not allowed to update data not owned by you.");
+            throw new ForbiddenException("Access denied. You are not allowed to update data not owned by you.");
         }
 
         if (!Objects.equals(existingTodoItem.getVersion(), dto.getVersion())) {
@@ -186,7 +186,7 @@ public class TodoItemDtoResource {
         TodoItem existingTodoItem = optionalTodoItem.orElseThrow();
         String username = optionalUsername.getValue().orElseThrow();
         if (!username.equalsIgnoreCase(existingTodoItem.getUsername())) {
-            throw new BadRequestException("Access denied. You are not allowed to delete data not owned by you.");
+            throw new ForbiddenException("Access denied. You are not allowed to delete data not owned by you.");
         }
 
         todoItemRepository.deleteById(id);

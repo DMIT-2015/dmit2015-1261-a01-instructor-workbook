@@ -51,11 +51,11 @@ public class LoginSession implements Serializable {
             nextPage = "/login?faces-redirect=true";
         } else {
             // Check if token has expired
-            if (LocalDateTime.now().isAfter(expiresIn)) {
-                // get a new token
-                String refreshToken = loginResponsePayload.getString("refresh_token");
-                loginResponsePayload = _loginRestClient.refreshToken(refreshToken, oidcClientId, oidcClientSecret,"refresh_token");
-            }
+//            if (LocalDateTime.now().isAfter(expiresIn)) {
+//                // get a new token
+//                String refreshToken = loginResponsePayload.getString("refresh_token");
+//                loginResponsePayload = _loginRestClient.refreshToken(refreshToken, oidcClientId, oidcClientSecret,"refresh_token");
+//            }
         }
 
         return nextPage;

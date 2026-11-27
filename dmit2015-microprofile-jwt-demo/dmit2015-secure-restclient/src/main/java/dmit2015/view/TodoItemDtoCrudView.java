@@ -60,12 +60,12 @@ public class TodoItemDtoCrudView implements Serializable {
      * <f:event type="postInvokeAction" listener="#{currentBeanView.init}" />
      * </f:metadata>
      */
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         try {
             todoItemDtos = todoItemDtoService.getAllTodoItemDtos();
         } catch (Exception e) {
-            Messages.addGlobalError("Error getting todoItemDtos %s", e.getMessage());
+            Messages.addGlobalError("Error getting todoItemDtos {0}", e.getMessage());
         }
     }
 

@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequestScoped
 @RegisterClientHeaders(AuthHeaderFactory.class)
 @RegisterProvider(ForbiddenResponseMapper.class)
+//@RegisterProvider(UnauthorizedResponseMapper.class)
 @RegisterProvider(BadRequestResponseMapper.class)
 @RegisterRestClient // baseUri is defined in `src/resources/META-INF/microprofile-config.properties
 public interface StudentMpRestClient {

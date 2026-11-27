@@ -44,6 +44,7 @@ import java.util.Optional;
 @RequestScoped
 @RegisterProvider(BadRequestResponseMapper.class)
 @RegisterProvider(ForbiddenResponseMapper.class)
+@RegisterProvider(UnauthorizedResponseMapper.class)
 @RegisterClientHeaders(AuthHeaderFactory.class)
 @RegisterRestClient  // baseUri is defined in `src/resources/META-INF/microprofile-config.properties
 public interface TodoItemDtoMpRestClient {
